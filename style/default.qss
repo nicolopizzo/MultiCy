@@ -1,0 +1,12 @@
+* {
+    font-size: 24px;
+    font-family: "UbuntuMono"
+}
+
+QPushButton {
+    padding: 20px
+}
+
+QLabel {
+    font-size: 16px;
+}
