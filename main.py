@@ -7,39 +7,71 @@ from PyQt5.QtCore import QCoreApplication
 from functools import partial
 from subApps.caesar import caesarFrame
 from subApps.vigenere import vigenereFrame
+from subApps.rsa import rsaFrame
+from subApps.aes import aesFrame
 
 class mainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
         # Declaring all of the widgets used
-        basicBox = QVBoxLayout()
+        grid = QGridLayout()
+
         caesarButton = QPushButton("Caesar")
         vigenereButton = QPushButton("Vigenere")
+        rsaButton = QPushButton("RSA")
+        aesButton = QPushButton("AES")
 
-        basicBox.setSpacing(10)
+        grid.setSpacing(0)
+        grid.setContentsMargins(0,0,0,0)
 
         caesarButton.clicked.connect(self.launchCaesar)
         vigenereButton.clicked.connect(self.launchVigenere)
+        rsaButton.clicked.connect(self.launchRSA)
+        aesButton.clicked.connect(self.launchAES)
 
-        basicBox.addWidget(caesarButton)
-        basicBox.addWidget(vigenereButton)
+        grid.addWidget(caesarButton, 0, 0)
+        grid.addWidget(vigenereButton, 1, 0)
+        grid.addWidget(rsaButton, 0, 1)
+        grid.addWidget(aesButton, 1, 1)
 
-        self.setLayout(basicBox)
-        self.loadStyle()
+        self.setLayout(grid)
+        self.loadStyle("style/dark.qss")
+        self.setFixedSize(600, 200)
         self.center()
+
         self.show()
+
 
     def launchCaesar(self):
         self.c = caesarFrame()
         self.c.setWindowTitle("Caesar")
         self.c.show()
+        self.c.closeEvent = lambda _: self.show()
 
         self.hide()
 
     def launchVigenere(self):
         self.v = vigenereFrame()
+        self.v.setWindowTitle("Vigenere")
         self.v.show()
+        self.v.closeEvent = lambda _: self.show()
+
+        self.hide()
+
+    def launchRSA(self):
+        self.r = rsaFrame()
+        self.r.setWindowTitle("RSA")
+        self.r.show()
+        self.r.closeEvent = lambda _: self.show()
+
+        self.hide()
+
+    def launchAES(self):
+        self.a = aesFrame()
+        self.a.setWindowTitle("AES")
+        self.a.show()
+        self.a.closeEvent = lambda _: self.show()
 
         self.hide()
 

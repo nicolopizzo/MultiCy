@@ -1,0 +1,74 @@
+QWidget {
+    background-color: #222831;
+}
+
+QPushButton {
+    background-color: #222831;
+    width: 300px;
+    height: 100px;
+    color: #eeeeee;
+    font-size: 24px;
+    border: 1px solid #393e46;
+}
+
+QPushButton:hover {
+    background-color: #2a313c;
+}
+
+QPushButton:pressed {
+    background-color: #15191e;
+}
+
+QPushButton#cipher {
+    background-color: #393e46;
+    width: 250px;
+}
+
+QPushButton#cipher:hover {
+    background-color: #454b54;
+}
+
+QPushButton#cipher:pressed {
+    background-color: #2e3238;
+}
+
+QPushButton#little {
+    background-color: #393e46;
+    width: 125px;
+    height: 75px;
+    font-size: 18px;
+}
+
+QPushButton#little:hover {
+    background-color: #454b54;
+}
+
+QPushButton#little:pressed {
+    background-color: #2e3238;
+}
+
+QTextEdit {
+    background-color: #393e46;
+    color: #eeeeee;
+    font-size: 18px;
+    border: 0px;
+}
+
+QLabel {
+    color: #eeeeee;
+    font-size: 18px;
+}
+
+QSpinBox {
+    color: #eeeeee;
+    font-size: 18px;
+    background-color: #393e46;
+    padding: 5px;
+}
+
+QLineEdit {
+    color: #eeeeee;
+    font-size: 18px;
+    background-color: #393e46;
+    padding: 5px;
+}

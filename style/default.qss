@@ -4,7 +4,7 @@
 }
 
 QPushButton {
-    padding: 20px
+    padding: 10px 5px;
 }
 
 QLabel {

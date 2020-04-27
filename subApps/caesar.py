@@ -10,7 +10,7 @@ class caesarFrame(QWidget):
 
         # Declaring layouts and widgets
         grid = QGridLayout()
-        centralVbox = QVBoxLayout()
+        centralGrid = QGridLayout()
 
         inLabel = QLabel()
         inText = QTextEdit()
@@ -22,6 +22,10 @@ class caesarFrame(QWidget):
         outLabel = QLabel()
         outText = QTextBrowser()
 
+        # Grid settings
+        grid.setSpacing(10)
+        centralGrid.setSpacing(0)
+
         # Setting input
         inLabel.setText("Input text")
         inLabel.setAlignment(Qt.AlignCenter)
@@ -31,9 +35,11 @@ class caesarFrame(QWidget):
 
         encryptButton.setText("Encrypt")
         encryptButton.clicked.connect(partial(self.onClickEncrypt, rotBox, inText, outText))
+        encryptButton.setObjectName("cipher")
 
         decryptButton.setText("Decrypt")
         decryptButton.clicked.connect(partial(self.onClickDecrypt, rotBox, inText, outText))
+        decryptButton.setObjectName("cipher")
 
         # Setting Output
         outLabel.setText("Output text")
@@ -43,17 +49,20 @@ class caesarFrame(QWidget):
         grid.addWidget(inLabel, 0, 0)
         grid.addWidget(inText, 1, 0)
 
-        centralVbox.addWidget(rotBox)
-        centralVbox.addWidget(encryptButton)
-        centralVbox.addWidget(decryptButton)
-        grid.addLayout(centralVbox, 1, 1)
+        grid.addWidget(rotBox, 0, 1)
+        
+        centralGrid.addWidget(encryptButton, 0, 0)
+        centralGrid.addWidget(decryptButton, 1, 0)
+        grid.addLayout(centralGrid, 1, 1)
 
         grid.addWidget(outLabel, 0, 2)
         grid.addWidget(outText, 1, 2)
 
         # Set layout in the widget
         self.setLayout(grid)
-        self.loadStyle()
+        self.loadStyle("../style/dark.qss")
+        self.setFixedSize(1000, 400)
+        
         self.center()
 
     def onClickEncrypt(self, rotBox: QSpinBox, inW: QTextEdit, outW: QTextBrowser):

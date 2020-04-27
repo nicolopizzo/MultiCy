@@ -26,23 +26,26 @@ class vigenereFrame(QWidget):
         inLabel.setAlignment(Qt.AlignCenter)
 
         # Setting central interactive part
-        inKey.setText("Enter the key...")
+        inKey.setPlaceholderText("Insert the WORM")
 
         encryptButton.setText("Encrypt")
         encryptButton.clicked.connect(partial(self.onClickEncrypt, inKey, inText, outText))
+        encryptButton.setObjectName("cipher")
 
         decryptButton.setText("Decrypt")
         decryptButton.clicked.connect(partial(self.onClickDecrypt, inKey, inText, outText))
+        decryptButton.setObjectName("cipher")
 
         # Setting output
-        outLabel.setText("Outpute text")
+        outLabel.setText("Output text")
         outLabel.setAlignment(Qt.AlignCenter)
 
         # Setting grid
         grid.addWidget(inLabel, 0, 0)
         grid.addWidget(inText, 1, 0)
 
-        centralVbox.addWidget(inKey)
+        grid.addWidget(inKey, 0, 1)
+
         centralVbox.addWidget(encryptButton)
         centralVbox.addWidget(decryptButton)
         grid.addLayout(centralVbox, 1, 1)
@@ -52,7 +55,9 @@ class vigenereFrame(QWidget):
 
         # Final setting to self
         self.setLayout(grid)
-        self.loadStyle()
+        self.loadStyle("../style/dark.qss")
+        self.setFixedSize(1000, 400)
+
         self.center()
 
     def center(self):
@@ -80,7 +85,7 @@ class vigenereFrame(QWidget):
     def onClickEncrypt(self, keyW: QLineEdit, inW: QTextEdit, outW: QTextBrowser):
         text = inW.toPlainText()
         key = keyW.text()
-        if not text.isupper() or not key.isupper():
+        if not text.isupper() or not key.isupper() or not key.isalpha():
             self.openErrorDialog("Text and key must be in uppercase. Please retry")
         else:
             text = self.vigenereEncrypt(text, key)
@@ -99,6 +104,7 @@ class vigenereFrame(QWidget):
 
     def vigenereEncrypt(self, s, k, f=lambda a, b: a + b):
         res = ""
+        k = ''.join(k.split())
         s = ''.join(s.split())
         for i in range(len(s)):
             if s[i].isupper():
